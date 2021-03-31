@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+    <!-- import Vue before Element -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <div id="app">
+        <p>{{ message }}</p>
+        <el-select v-model="select1" placeholder="請選擇" @change="changeColor(select1,1)">
+            <el-option v-for="item in ListOfMail" :key="item.id" :label="item.Name":value="item.id" :style="{'background-color':item.color}">
+            </el-option>
+        </el-select>+
+        <el-select v-model="select2" placeholder="請選擇" @change="changeColor(select2,2)">
+            <el-option v-for="item in ListOfMail" :key="item.id" :label="item.Name":value="item.id" :style="{'background-color':item.color}">
+            </el-option>
+        </el-select>+
+        <el-select v-model="select3" placeholder="請選擇" @change="changeColor(select3,3);count()">
+            <el-option v-for="item in ListOfMail" :key="item.id" :label="item.Name":value="item.id" :style="{'background-color':item.color}">
+            </el-option>
+        </el-select>
+
+        <p>建議隊伍</p>
+        <el-select v-model="counter1" placeholder="請選擇" >
+            <el-option v-for="item in ListOfMail" :key="item.id" :label="item.Name":value="item.id" :style="{'background-color':item.color}">
+            </el-option>
+        </el-select>+
+        <el-select v-model="counter2" placeholder="請選擇" >
+            <el-option v-for="item in ListOfMail" :key="item.id" :label="item.Name":value="item.id" :style="{'background-color':item.color}">
+            </el-option>
+        </el-select>+
+        <el-select v-model="counter3" placeholder="請選擇" >
+            <el-option v-for="item in ListOfMail" :key="item.id" :label="item.Name":value="item.id" :style="{'background-color':item.color}">
+            </el-option>
+        </el-select>
+        <br>
+        <p>Tips</p>
+        <el-input
+            type="textarea"
+            :rows="2"
+            placeholder=""
+            v-model="textarea" style="width:58%">
+        </el-input>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'GVG對手',
+                ListOfMail: [
+                    { id: '0', Name: '女神奈奈' ,color: "deepskyblue" },
+                    { id: '1', Name: '賽西',color: "indigo" },
+                    { id: '2', Name: '查爾斯',color: "limegreen" },
+                    { id: '3', Name: '蘇琳',color: "gold" },
+                    { id: '4', Name: '蘿菲',color: "red" },
+                    { id: '5', Name: '雅卡泰絲',color: "red" },
+                    { id: '6', Name: '拉斯',color: "red" },
+                ], 
+                select1: '',
+                select2: '',
+                select3: '',
+                counter1: '',
+                counter2: '',
+                counter3: '',
+                textarea: '',
+            },
+            methods: {
+                changeColor(value,no) {
+                    // const refsElInput = this.$el.querySelectorAll(
+                    //     ".el-input--suffix .el-input__inner"
+                    // )[rowID - 1];
+                    const refsElInput = this.$el.querySelectorAll(
+                         ".el-input--suffix .el-input__inner")[no-1]
+                    const color = this.ListOfMail.find((item) => item.id === value).color;
+                    refsElInput.style['background-color'] = color;
+                    refsElInput.style['text-shadow'] = 'black 0.1em 0.1em 0.2em';
+                    refsElInput.style['color'] = 'white';
+                    // console.log("refsElInput",refsElInput);
+                    // const color = this.ListOfMail.find((item) => item.id === id)
+                    //     .color;
+                    // console.log(color);
+                    // refsElInput.style.color = color;
+                    // console.log(refsElInput);
+                },
+                count(value){
+                    console.log("value",value);
+                    this.counter1='4';
+                    this.counter2='5';
+                    this.counter3='6';
+                    this.changeColor(this.counter1,4);
+                    this.changeColor(this.counter2,5);
+                    this.changeColor(this.counter3,6);
+                    this.textarea="火蘿菲需點些技能";
+                }
+            },
+     })
+    </script>
+    <style>
+    .el-select-dropdown__item{
+        color:white;
+        font-weight: bold;
+        text-shadow: black 0.1em 0.1em 0.2em;
+        text-align: center;
+    } 
+    .el-input__inner{
+        /* background-color:#08164D ;
+        color:#fff;
+        border:0px;
+        border-radius:0px; */
+        font-weight: bold;
+        /* color:white;
+        text-shadow: black 0.1em 0.1em 0.2em; */
+        text-align: center;
+  }
+    </style>
+</body>
+
+</html>
