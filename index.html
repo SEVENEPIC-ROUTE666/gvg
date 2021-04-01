@@ -101,6 +101,46 @@
             },
      })
     </script>
+
+    <!-- 要改寫成下面 -->
+  <script type="module">
+    import axios from './axios.js';
+    Vue.prototype.$axios = axios;
+    new Vue({
+        el: '#app',
+        data: {
+          tableData: [],
+          timer:"",
+          loadingBtn:false
+        },
+        created: function () {
+          
+            },
+        methods: {
+        async load(){
+          //let st_time= await new Date();
+          //let ed_time;
+          
+          this.loadingBtn=await true;
+          await this.$axios.get('http://localhost:3000/posts/')
+              .then(res => {
+                this.tableData=res.data;
+                console.log(res.data);
+              })
+              this.loadingBtn=await false;
+             // ed_time=await new Date();
+             // this.timer=await (ed_time-st_time)/1000;
+            },
+          clear(){
+            this.tableData=[];
+           // this.timer="";
+          }
+
+        }
+      })
+    </script>
+
+
     <style>
     .el-select-dropdown__item{
         color:white;
